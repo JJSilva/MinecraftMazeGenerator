@@ -9,12 +9,12 @@ namespace MinecraftMazeGenerator
     {
         public static void Main(string[] args)
         {
-            
-           List<Tunnel> tunnels = new List<Tunnel>();
-           Tunnel firstTunnel = new Tunnel();
 
-           Console.WriteLine("Speciify Starting Coordinates");
-            
+            List<Tunnel> tunnels = new List<Tunnel>();
+            Tunnel firstTunnel = new Tunnel();
+
+            Console.WriteLine("Speciify Starting Coordinates");
+
             String input = Console.ReadLine();
 
             firstTunnel.OriginX = Int32.Parse(input.Split(' ')[0]);
@@ -23,7 +23,6 @@ namespace MinecraftMazeGenerator
             firstTunnel.DestinationX = firstTunnel.OriginX + 1;
             firstTunnel.DestinationY = firstTunnel.OriginY + 1;
             firstTunnel.DestinationZ = firstTunnel.OriginZ + 10;
-
 
             Console.WriteLine(String.Format("Starting at {0} {1} {2}", firstTunnel.OriginX, firstTunnel.OriginY, firstTunnel.OriginZ));
             int i = 0;
@@ -47,10 +46,8 @@ namespace MinecraftMazeGenerator
             Console.WriteLine(output);
             Console.ReadLine();
         }
-
-        
     }
-        
+
 
     public class Tunnel
     {
@@ -61,39 +58,38 @@ namespace MinecraftMazeGenerator
         public int DestinationX;
         public int DestinationY;
         public int DestinationZ;
-  
+
 
         public Tunnel AddTunnel(Tunnel lastTunnel, int i)
         {
             Tunnel newTunnel = new Tunnel();
-           
+
             Random random = new Random();
 
-            int newTunnelDepth = random.Next(5, 25);
-
-
-
+            int newTunnelDepth;
+            newTunnelDepth = random.Next(5, 25);
             if (i % 2 == 0)
             {
                 //Even
+               
                 newTunnel.OriginX = lastTunnel.OriginX - (newTunnelDepth / 2);
                 newTunnel.DestinationX = lastTunnel.OriginX + (newTunnelDepth / 2);
 
                 newTunnel.OriginY = lastTunnel.DestinationY;
                 newTunnel.DestinationY = lastTunnel.DestinationY;
 
-                newTunnel.OriginZ = lastTunnel.DestinationZ;
-                newTunnel.DestinationZ = (lastTunnel.DestinationZ + 1);
+                newTunnel.OriginZ = (lastTunnel.DestinationZ) - (newTunnelDepth / 2);
+                newTunnel.DestinationZ = (newTunnel.OriginZ + 1);
             }
             else
             {
                 //Odd, Rotate
                 newTunnel.OriginX = lastTunnel.OriginX;
-                newTunnel.DestinationX = (lastTunnel.OriginX +1);
+                newTunnel.DestinationX = (newTunnel.OriginX + 1);
 
                 newTunnel.OriginY = lastTunnel.DestinationY;
                 newTunnel.DestinationY = lastTunnel.DestinationY;
-                                
+
                 newTunnel.OriginZ = lastTunnel.DestinationZ - (newTunnelDepth / 2);
                 newTunnel.DestinationZ = lastTunnel.DestinationZ + (newTunnelDepth / 2);
             }
@@ -116,3 +112,4 @@ namespace MinecraftMazeGenerator
             return output.ToString();
         }
     }
+}
