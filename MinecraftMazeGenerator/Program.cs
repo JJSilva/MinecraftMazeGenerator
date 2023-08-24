@@ -39,7 +39,7 @@ namespace MinecraftMazeGenerator
                 lastTunnel = newTunnel;
                 i++;
 
-            } while (i < 10);
+            } while (i < 1000);
 
             String output = Tunnel.GenerateCommand(tunnels);
 
@@ -101,7 +101,7 @@ namespace MinecraftMazeGenerator
             StringBuilder output = new StringBuilder();
             foreach (Tunnel tunnel in tunnels)
             {
-                output.AppendLine(String.Format("/fill {0} {1} {2} {3} {4} {5} minecraft:diamond_block",
+                output.AppendLine(String.Format("fill {0} {1} {2} {3} {4} {5} minecraft:diamond_block",
                     tunnel.OriginX,
                     tunnel.OriginY,
                     tunnel.OriginZ,
