@@ -50,17 +50,15 @@ namespace MinecraftMazeGenerator
             Block glassBlock = new Block();
             glassBlock = glassBlock.CreateGlassBlock(blocks);
             glassBlock.Command = glassBlock.GenerateFillCommand(glassBlock, Block.Type.dirt);
-            Console.WriteLine(glassBlock.Command);   
             output.AppendLine(glassBlock.Command);
 
             foreach (Block block in blocks)
             {
                 block.Command = block.GenerateFillCommand(block, Block.Type.air);
                 output.AppendLine(block.Command);
-                Console.WriteLine(block.Command);
             }
 
-            output.AppendLine("gamemode survival");
+            output.AppendLine("gamemode survival @a");
             output.AppendLine("give @a minecraft:torch 64");
             output.AppendLine(String.Format("tp @a {0} {1} {2}", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
             output.AppendLine(String.Format("setblock {0} {1} {2} minecraft:torch keep", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
