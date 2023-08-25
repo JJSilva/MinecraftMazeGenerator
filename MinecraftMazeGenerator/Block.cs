@@ -13,6 +13,8 @@ namespace MinecraftMazeGenerator
         public enum Type
         {
             glass,
+            dirt,
+            diamond_block,
             air
         }
 

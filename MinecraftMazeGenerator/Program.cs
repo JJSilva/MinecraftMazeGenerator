@@ -49,7 +49,7 @@ namespace MinecraftMazeGenerator
             Console.WriteLine("Generating Glass Block");
             Block glassBlock = new Block();
             glassBlock = glassBlock.CreateGlassBlock(blocks);
-            glassBlock.Command = glassBlock.GenerateFillCommand(glassBlock, Block.Type.glass);
+            glassBlock.Command = glassBlock.GenerateFillCommand(glassBlock, Block.Type.dirt);
             Console.WriteLine(glassBlock.Command);   
             output.AppendLine(glassBlock.Command);
 
@@ -64,6 +64,8 @@ namespace MinecraftMazeGenerator
             output.AppendLine("give @a minecraft:torch 64");
             output.AppendLine(String.Format("setblock {0} {1} {2} chest replace",lastBlock.Origin.X, lastBlock.Origin.Y, lastBlock.Origin.Z));
             output.AppendLine(String.Format("tp @a {0} {1} {2}", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
+            output.AppendLine(String.Format("setblock {0} {1} {2} minecraft:torch keep", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
+
 
             string fifoPath = File.ReadAllLines("options.txt")[0];
             fifoPath = fifoPath + "/fifo";
