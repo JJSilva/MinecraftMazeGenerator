@@ -60,12 +60,17 @@ namespace MinecraftMazeGenerator
                 Console.WriteLine(block.Command);
             }
 
-            output.AppendLine("gamemode creative");
+            output.AppendLine("gamemode survival");
             output.AppendLine("give @a minecraft:torch 64");
-            output.AppendLine(String.Format("setblock {0} {1} {2} chest replace",lastBlock.Origin.X, lastBlock.Origin.Y, lastBlock.Origin.Z));
             output.AppendLine(String.Format("tp @a {0} {1} {2}", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
             output.AppendLine(String.Format("setblock {0} {1} {2} minecraft:torch keep", firstBlock.Origin.X, firstBlock.Origin.Y, firstBlock.Origin.Z));
 
+            Coordinate ChestCoordinate = new Coordinate { X = lastBlock.Origin.X, Y = lastBlock.Origin.Y, Z = lastBlock.Origin.Z };
+            Coordinate HopperCoordinate = new Coordinate { X = lastBlock.Origin.X, Y = lastBlock.Origin.Y + 1, Z = lastBlock.Origin.Z };
+            Coordinate PrizeCoordinate = new Coordinate { X = lastBlock.Origin.X, Y = lastBlock.Origin.Y + 2, Z = lastBlock.Origin.Z };
+            output.AppendLine(String.Format("setblock {0} {1} {2} minecraft:chest", ChestCoordinate.X, ChestCoordinate.Y, ChestCoordinate.Z));
+            output.AppendLine(String.Format("setblock {0} {1} {2} minecraft:hopper", HopperCoordinate.X, HopperCoordinate.Y, HopperCoordinate.Z));
+            output.AppendLine(String.Format("summon item {0} {1} {2} {{Item:{{id:\"minecraft:dragon_head\",Count:1b}}}}", PrizeCoordinate.X, PrizeCoordinate.Y, PrizeCoordinate.Z));
 
             string fifoPath = File.ReadAllLines("options.txt")[0];
             fifoPath = fifoPath + "/fifo";
@@ -73,7 +78,7 @@ namespace MinecraftMazeGenerator
 
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                sw.WriteLine("say hello world");
+                sw.WriteLine("say Maze Generated");
                 sw.WriteLine(output.ToString());
             }
 
