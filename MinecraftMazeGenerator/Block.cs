@@ -10,14 +10,6 @@ namespace MinecraftMazeGenerator
         public Coordinate Destination;
         public string Command;
 
-        public enum Type
-        {
-            glass,
-            dirt,
-            diamond_block,
-            air
-        }
-
         public Block()
         {
             Origin = new Coordinate();
@@ -30,18 +22,23 @@ namespace MinecraftMazeGenerator
             this.Destination = Destination;
         }
 
+        public enum Type
+        {
+            glass,
+            dirt,
+            diamond_block,
+            air
+        }
+
         public Block AddBlock(Block lastTunnel, int i)
         {
-            Block newBlock = new Block();
-
             Random random = new Random();
-
+            Block newBlock = new Block();
             int newBlockDepth;
             newBlockDepth = random.Next(5, 25);
             if (i % 2 == 0)
             {
                 //Even
-
                 newBlock.Origin.X = lastTunnel.Origin.X - (newBlockDepth / 2);
                 newBlock.Destination.X = lastTunnel.Origin.X + (newBlockDepth / 2);
 
@@ -77,7 +74,6 @@ namespace MinecraftMazeGenerator
         {
             Block block = new Block();
 
-
             block.Origin.X = blocks.OrderBy(i => i.Origin.X).FirstOrDefault().Origin.X - 1;
             block.Origin.Y = blocks.OrderBy(i => i.Origin.Y).FirstOrDefault().Origin.Y - 1;
             block.Origin.Z = blocks.OrderBy(i => i.Origin.Z).FirstOrDefault().Origin.Z - 1;
@@ -88,7 +84,6 @@ namespace MinecraftMazeGenerator
 
             return block;
         }
-
     }
 
     public class Coordinate
